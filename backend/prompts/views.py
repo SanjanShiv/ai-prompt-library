@@ -19,20 +19,6 @@ class PromptListView(View):
         return JsonResponse([p.to_dict() for p in prompts], safe=False)
 
     def post(self, request):
-        auth_header = request.headers.get('Authorization')
-        if not auth_header or not auth_header.startswith('Bearer '):
-            return JsonResponse({'error': 'Unauthorized. Please provide a valid Bearer token.'}, status=401)
-            
-        token = auth_header.split(' ')[1]
-        try:
-            import jwt
-            from django.conf import settings
-            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-        except jwt.ExpiredSignatureError:
-            return JsonResponse({'error': 'Token has expired.'}, status=401)
-        except jwt.InvalidTokenError:
-            return JsonResponse({'error': 'Invalid token.'}, status=401)
-
         try:
             data = json.loads(request.body)
             

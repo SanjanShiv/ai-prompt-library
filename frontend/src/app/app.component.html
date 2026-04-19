@@ -7,13 +7,6 @@
     <div class="nav-links">
       <a routerLink="/prompts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <button type="button" class="btn-primary" (click)="goCreatePrompt()">Create Prompt</button>
-      <div *ngIf="!isLoggedIn" class="auth-buttons">
-        <button class="btn-secondary" type="button" (click)="goToLoginSignup()">Login / Sign Up</button>
-      </div>
-      <div *ngIf="isLoggedIn" class="user-menu">
-        <span class="user-email">{{ userEmail }}</span>
-        <button class="btn-secondary" (click)="logout()">Logout</button>
-      </div>
     </div>
   </nav>
 
