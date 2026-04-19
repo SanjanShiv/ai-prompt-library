@@ -1,0 +1,11 @@
+# Railway Deployment Configuration
+# This file tells Railway how to deploy your Django app
+
+[build]
+builder = "dockerfile"
+
+[deploy]
+healthcheckPath = "/prompts/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

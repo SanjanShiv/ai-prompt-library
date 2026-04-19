@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ai-prompt-backend
+    runtime: docker
+    buildCommand: "docker build -t ai-prompt-backend ."
+    startCommand: "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn prompt_library.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DATABASE_URL
+        generateValue: true
+      - key: REDIS_URL
+        generateValue: true
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: "*"
