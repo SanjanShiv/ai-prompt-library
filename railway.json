@@ -2,8 +2,5 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE"
-  },
-  "deploy": {
-    "startCommand": "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn prompt_library.wsgi:application --bind 0.0.0.0:$PORT"
   }
 }
