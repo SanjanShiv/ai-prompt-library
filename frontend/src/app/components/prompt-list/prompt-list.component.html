@@ -1,0 +1,36 @@
+<div class="list-container animate-fade-in">
+  <div class="header-section">
+    <h2>Emplay AIPrompt Library</h2>
+    <p class="subtitle">Explore the best AI generation prompts from the community.</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading prompts...</p>
+  </div>
+
+  <div *ngIf="!loading && prompts.length === 0" class="empty-state glass-card">
+    <div class="icon">✨</div>
+    <h3>No Prompts Found</h3>
+    <p>Be the first to create a prompt and share it with the world.</p>
+    <button class="btn-primary mt-4" routerLink="/prompts/new">Create Prompt</button>
+  </div>
+
+  <div class="prompt-grid" *ngIf="!loading && prompts.length > 0">
+    <div *ngFor="let prompt of prompts" class="prompt-card glass-card" [routerLink]="['/prompts', prompt.id]">
+      <div class="card-header">
+        <h3>{{ prompt.title }}</h3>
+        <div class="complexity-badge" [attr.data-level]="prompt.complexity">
+          C-{{ prompt.complexity }}
+        </div>
+      </div>
+      <div class="tag-list" *ngIf="prompt.tags && prompt.tags.length > 0">
+        <span class="prompt-tag" *ngFor="let tag of prompt.tags">#{{ tag }}</span>
+      </div>
+      <div class="card-footer">
+        <span class="date">{{ prompt.created_at | date:'mediumDate' }}</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </div>
+</div>

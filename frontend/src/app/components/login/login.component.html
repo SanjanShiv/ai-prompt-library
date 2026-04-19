@@ -1,0 +1,104 @@
+<div class="form-container animate-fade-in">
+  <button class="back-btn" routerLink="/prompts">← Back Home</button>
+  
+  <div class="form-card glass-card">
+    <div class="form-header">
+      <h2>{{ isSignupMode ? 'Create Account' : 'Welcome Back' }}</h2>
+      <p>{{ isSignupMode ? 'Join the AI Prompt Library community' : 'Sign in to create and manage prompts' }}</p>
+    </div>
+
+    <!-- Mode Toggle Buttons -->
+    <div class="mode-toggle">
+      <button 
+        type="button" 
+        class="mode-btn" 
+        [class.active]="!isSignupMode"
+        (click)="setMode(false)">
+        Login
+      </button>
+      <button 
+        type="button" 
+        class="mode-btn" 
+        [class.active]="isSignupMode"
+        (click)="setMode(true)">
+        Sign Up
+      </button>
+    </div>
+
+    <form [formGroup]="isSignupMode ? signupForm : loginForm" (ngSubmit)="onSubmit()">
+      
+      <div *ngIf="isSignupMode" class="form-group">
+        <label for="name">Full Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name" 
+          class="input-glass"
+          placeholder="Your full name">
+        <div class="error-msg" *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.hasError('required')">
+          Name is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          [formControlName]="isSignupMode ? 'email' : 'email'" 
+          class="input-glass"
+          [placeholder]="isSignupMode ? 'your.email@example.com' : 'your.email@example.com'">
+        <div class="error-msg" *ngIf="(isSignupMode ? signupForm.get('email') : loginForm.get('email'))?.touched && (isSignupMode ? signupForm.get('email') : loginForm.get('email'))?.hasError('required')">
+          Email is required.
+        </div>
+        <div class="error-msg" *ngIf="(isSignupMode ? signupForm.get('email') : loginForm.get('email'))?.touched && (isSignupMode ? signupForm.get('email') : loginForm.get('email'))?.hasError('email')">
+          Please enter a valid email address.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          [formControlName]="isSignupMode ? 'password' : 'password'" 
+          class="input-glass"
+          placeholder="••••••••">
+        <div class="error-msg" *ngIf="(isSignupMode ? signupForm.get('password') : loginForm.get('password'))?.touched && (isSignupMode ? signupForm.get('password') : loginForm.get('password'))?.hasError('required')">
+          Password is required.
+        </div>
+        <div class="error-msg" *ngIf="isSignupMode && signupForm.get('password')?.touched && signupForm.get('password')?.hasError('minlength')">
+          Password must be at least 6 characters long.
+        </div>
+      </div>
+
+      <div *ngIf="isSignupMode" class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          formControlName="confirmPassword" 
+          class="input-glass"
+          placeholder="••••••••">
+        <div class="error-msg" *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.hasError('required')">
+          Please confirm your password.
+        </div>
+        <div class="error-msg" *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.hasError('mismatch')">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <div *ngIf="submitError" class="submit-error">
+        {{ submitError }}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting || (isSignupMode ? signupForm.invalid : loginForm.invalid)">
+          <span *ngIf="isSubmitting">{{ isSignupMode ? 'Creating Account...' : 'Signing In...' }}</span>
+          <span *ngIf="!isSubmitting">{{ isSignupMode ? 'Create Account' : 'Sign In' }}</span>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

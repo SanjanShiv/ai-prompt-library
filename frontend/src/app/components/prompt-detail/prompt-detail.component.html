@@ -1,0 +1,39 @@
+<div class="detail-container animate-fade-in">
+  <button class="back-btn" routerLink="/prompts">← Back to Prompts</button>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="error" class="error-state glass-card">
+    {{ error }}
+  </div>
+
+  <div *ngIf="prompt && !loading" class="detail-card glass-card">
+    <div class="card-header">
+      <h2>{{ prompt.title }}</h2>
+      <button *ngIf="isAdmin" class="btn-delete" (click)="deletePrompt()">Delete Prompt</button>
+      <div class="stats-row">
+        <div class="stat-badge view-count">
+          <span class="icon">👁️</span>
+          <span>{{ prompt.view_count }} views</span>
+        </div>
+        <div class="stat-badge complexity" [attr.data-level]="prompt.complexity">
+          Complexity: {{ prompt.complexity }}/10
+        </div>
+      </div>
+      <div class="tag-list" *ngIf="prompt.tags && prompt.tags.length > 0">
+        <span class="prompt-tag" *ngFor="let tag of prompt.tags">#{{ tag }}</span>
+      </div>
+    </div>
+    
+    <div class="prompt-content">
+      <pre>{{ prompt.content }}</pre>
+    </div>
+    
+    <div class="card-footer">
+      <span class="date">Added on {{ prompt.created_at | date:'longDate' }} at {{ prompt.created_at | date:'shortTime' }}</span>
+      <button class="btn-copy" (click)="copyContent()">Copy Prompt</button>
+    </div>
+  </div>
+</div>

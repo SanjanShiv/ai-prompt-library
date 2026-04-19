@@ -1,0 +1,84 @@
+<div class="form-container animate-fade-in">
+  <button class="back-btn" routerLink="/prompts">← Back</button>
+  
+  <div class="form-card glass-card">
+    <div class="form-header">
+      <h2>Create New Prompt</h2>
+      <p>Share a powerful AI prompt with the community</p>
+    </div>
+
+    <form [formGroup]="promptForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-group">
+        <label for="title">Prompt Title</label>
+        <input 
+          type="text" 
+          id="title" 
+          formControlName="title" 
+          class="input-glass"
+          placeholder="e.g. Cyberpunk Neon Cityscape">
+        <div class="error-msg" *ngIf="promptForm.get('title')?.touched && promptForm.get('title')?.hasError('required')">
+          Title is required.
+        </div>
+        <div class="error-msg" *ngIf="promptForm.get('title')?.touched && promptForm.get('title')?.hasError('minlength')">
+          Title must be at least 3 characters.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Prompt Content</label>
+        <textarea 
+          id="content" 
+          formControlName="content" 
+          class="input-glass textarea"
+          placeholder="Enter the full, detailed prompt here..."></textarea>
+        <div class="error-msg" *ngIf="promptForm.get('content')?.touched && promptForm.get('content')?.hasError('required')">
+          Content is required.
+        </div>
+        <div class="error-msg" *ngIf="promptForm.get('content')?.touched && promptForm.get('content')?.hasError('minlength')">
+          Content must be at least 20 characters long.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="tags">Tags (Optional)</label>
+        <input 
+          type="text" 
+          id="tags" 
+          formControlName="tags" 
+          class="input-glass"
+          placeholder="e.g. anime, cyberpunk, 4k">
+      </div>
+      <div class="form-group">
+        <label for="complexity">Complexity (1-10): <span class="badge">{{ promptForm.get('complexity')?.value }}</span></label>
+        <div class="slider-container">
+          <input 
+            type="range" 
+            id="complexity" 
+            formControlName="complexity" 
+            min="1" 
+            max="10" 
+            class="slider">
+          <div class="slider-labels">
+            <span>Simple (1)</span>
+            <span>Complex (10)</span>
+          </div>
+        </div>
+        <div class="error-msg" *ngIf="promptForm.get('complexity')?.touched && promptForm.get('complexity')?.invalid">
+          Complexity must be between 1 and 10.
+        </div>
+      </div>
+
+      <div *ngIf="submitError" class="submit-error">
+        {{ submitError }}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting || promptForm.invalid">
+          <span *ngIf="isSubmitting">Publishing...</span>
+          <span *ngIf="!isSubmitting">Publish Prompt</span>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

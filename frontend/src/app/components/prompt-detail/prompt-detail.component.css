@@ -1,0 +1,137 @@
+.detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  color: var(--text-primary);
+  transform: translateX(-4px);
+}
+
+.detail-card {
+  padding: 3rem;
+}
+
+.card-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stats-row {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.view-count {
+  color: #33bbff;
+  background: rgba(51, 187, 255, 0.1);
+}
+
+.complexity[data-level="1"], .complexity[data-level="2"], .complexity[data-level="3"] {
+  color: var(--success);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.complexity[data-level="8"], .complexity[data-level="9"], .complexity[data-level="10"] {
+  color: #FF3366;
+  background: rgba(255, 51, 102, 0.1);
+}
+
+.prompt-content {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.prompt-content pre {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+.date {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.btn-copy {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-copy:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.prompt-tag {
+  background: rgba(100, 100, 255, 0.15);
+  color: #AACCFF;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.loading-state, .error-state {
+  text-align: center;
+  padding: 4rem;
+}
+
+.error-state {
+  color: #FF3366;
+  border-color: rgba(255, 51, 102, 0.3);
+}

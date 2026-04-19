@@ -1,0 +1,136 @@
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+.prompt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.prompt-card {
+  padding: 24px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: auto;
+  gap: 16px;
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.complexity-badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.complexity-badge[data-level="1"], .complexity-badge[data-level="2"], .complexity-badge[data-level="3"] {
+  color: #00FF88;
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.complexity-badge[data-level="4"], .complexity-badge[data-level="5"], .complexity-badge[data-level="6"], .complexity-badge[data-level="7"] {
+  color: #FF9900;
+  background: rgba(255, 153, 0, 0.1);
+}
+
+.complexity-badge[data-level="8"], .complexity-badge[data-level="9"], .complexity-badge[data-level="10"] {
+  color: #FF3333;
+  background: rgba(255, 51, 51, 0.1);
+}
+
+.card-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.arrow {
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.prompt-card:hover .arrow {
+  transform: translateX(4px);
+}
+
+.loading-state, .empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-state {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.icon {
+  font-size: 48px;
+  margin-bottom: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left-color: var(--accent-color);
+  border-radius: 50%;
+  animation: startup-spinner-rotate 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes startup-spinner-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.prompt-tag {
+  background: rgba(100, 100, 255, 0.15);
+  color: #AACCFF;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
