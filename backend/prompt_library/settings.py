@@ -87,17 +87,29 @@ WSGI_APPLICATION = 'prompt_library.wsgi.application'
 
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"postgresql://{os.environ.get('POSTGRES_USER', 'postgres')}:{os.environ.get('POSTGRES_PASSWORD', 'postgres')}@{os.environ.get('POSTGRES_HOST', 'db')}:{os.environ.get('POSTGRES_PORT', '5432')}/{os.environ.get('POSTGRES_DB', 'prompt_db')}",
-        conn_max_age=600
-    )
-}
+if os.environ.get('DATABASE_URL'):
+    # Render provides DATABASE_URL
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600)
+    }
+else:
+    # Local Docker development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', 'prompt_db'),
+            'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'postgres'),
+            'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        }
+    }
 
 # Redis configuration
 REDIS_URL = os.environ.get('REDIS_URL', f"redis://{os.environ.get('REDIS_HOST', 'redis')}:{os.environ.get('REDIS_PORT', '6379')}")
 REDIS_HOST = REDIS_URL.split('://')[1].split(':')[0] if '://' in REDIS_URL else os.environ.get('REDIS_HOST', 'redis')
 REDIS_PORT = int(REDIS_URL.split(':')[-1]) if ':' in REDIS_URL else int(os.environ.get('REDIS_PORT', 6379))
+
 
 
 # Password validation
